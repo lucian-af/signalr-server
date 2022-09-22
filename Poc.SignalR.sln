@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poc.SignalR", "Poc.SignalR.csproj", "{C5820C60-211B-41EB-B649-3FC2319A0848}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poc.SignalR", "src\Poc.SignalR\Poc.SignalR.csproj", "{10E850A7-04F3-44F2-A022-ABFB2955C647}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0FBDDE86-DDB4-43C9-9FA8-F4CB2531C856}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +17,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C5820C60-211B-41EB-B649-3FC2319A0848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C5820C60-211B-41EB-B649-3FC2319A0848}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C5820C60-211B-41EB-B649-3FC2319A0848}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C5820C60-211B-41EB-B649-3FC2319A0848}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10E850A7-04F3-44F2-A022-ABFB2955C647}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10E850A7-04F3-44F2-A022-ABFB2955C647}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10E850A7-04F3-44F2-A022-ABFB2955C647}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10E850A7-04F3-44F2-A022-ABFB2955C647}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
