@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using Poc.SignalR.Hubs.Interfaces;
+using Poc.SignalServer;
 
-namespace Poc.SignalServer
+namespace Poc.SignalR.BackgroundTask
 {
     public class Worker : BackgroundService
     {
@@ -23,7 +25,7 @@ namespace Poc.SignalServer
                 // receber mensagem da fila
                 // enviar para o client que está "esperando"
 
-                var idPagamentoEncontrado = new Random().Next(1, 5).ToString();
+                var idPagamentoEncontrado = "1";
 
                 await _hubContext
                     .Clients

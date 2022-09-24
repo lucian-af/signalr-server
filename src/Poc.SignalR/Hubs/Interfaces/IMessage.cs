@@ -1,4 +1,4 @@
-﻿namespace Poc.SignalServer
+﻿namespace Poc.SignalR.Hubs.Interfaces
 {
     public interface IMessage
     {
