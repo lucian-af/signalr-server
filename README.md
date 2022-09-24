@@ -1,2 +1,3 @@
-# signalr-server
-Projeto de estudo com .NET 6 e SignalR + Background Task
+# .NET 6 + SignalR com Background Task
+
+Projeto de estudos com .NET 6, SignalR e Background Task
