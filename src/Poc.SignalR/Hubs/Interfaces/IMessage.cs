@@ -2,6 +2,7 @@
 {
     public interface IMessage
     {
-        Task SendMessageToEspecificClient(string message);
+        Task SendMessageToEspecificGroup(string message);
+        Task CloseConnectionToEspecificGroup(string idGroup);
     }
 }

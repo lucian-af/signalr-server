@@ -9,7 +9,7 @@ namespace Poc.SignalR.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "O campo senha é obrigatório.")]
-        [StringLength(50, ErrorMessage = "A senha deve ter entre {1} e {2} caracteres.", MinimumLength = 6)]
+        [StringLength(50, ErrorMessage = "A senha deve ter entre 6 e 50 caracteres.", MinimumLength = 6)]
         public string Senha { get; set; }
     }
 }

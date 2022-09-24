@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Poc.SignalR.Settings;
 using System.Text;
 
 namespace Poc.SignalR.Configurations
@@ -8,7 +9,7 @@ namespace Poc.SignalR.Configurations
     {
         private const string AUTH_SECRET = "AUTH_SECRET";
 
-        public static IServiceCollection AddAuthConfiguration(this IServiceCollection services)
+        public static IServiceCollection AddAuthConfiguration(this IServiceCollection services, AuthSettings authSettings)
         {
             var secret = Environment.GetEnvironmentVariable(AUTH_SECRET);
             var key = Encoding.ASCII.GetBytes(secret);
@@ -26,8 +27,8 @@ namespace Poc.SignalR.Configurations
                         IssuerSigningKey = new SymmetricSecurityKey(key),
                         ValidateIssuer = true,
                         ValidateAudience = true,
-                        ValidAudience = "Lucian AF",
-                        ValidIssuer = "https://github.com/lucian-af"
+                        ValidAudience = authSettings.ValidoEm,
+                        ValidIssuer = authSettings.Emissor
                     };
                     x.Events = new JwtBearerEvents
                     {

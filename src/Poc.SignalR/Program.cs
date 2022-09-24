@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.Connections;
 using Poc.SignalR.BackgroundTask;
 using Poc.SignalR.Configurations;
 using Poc.SignalR.Settings;
@@ -7,12 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-var authSettings = builder.Configuration.GetSection(nameof(AuthSettings));
-builder.Services.Configure<AuthSettings>(authSettings);
+var section = builder.Configuration.GetSection(nameof(AuthSettings));
+var authSettings = section.Get<AuthSettings>();
 
 builder.Services
-    .AddSwagger()
+    .Configure<AuthSettings>(section)
     .AddHostedService<Worker>()
+    .AddSwagger()
     .AddCors(
     options => options.AddPolicy("AllowCors",
     builder =>
@@ -23,7 +25,7 @@ builder.Services
             .AllowCredentials()
             .SetIsOriginAllowed(hostName => true);
     }))
-    .AddAuthConfiguration()
+    .AddAuthConfiguration(authSettings)
     .AddSignalR();
 
 // ==================================================================================================================== //
@@ -40,8 +42,15 @@ app
     {
         e.MapHub<MessageHub>("/poc", opt =>
         {
+            // fecha a conexão se o token enviado estiver expirado
             opt.CloseOnAuthenticationExpiration = true;
-        });
+
+            // limita o pedido de conexão somente por clients WebSockets
+            opt.Transports = HttpTransportType.WebSockets;
+        })
+        // define que todos os métodos do Hub "MessageHub" precisa de autorização para aceitar conexão
+        .RequireAuthorization();
+
         e.MapControllers();
     });
 

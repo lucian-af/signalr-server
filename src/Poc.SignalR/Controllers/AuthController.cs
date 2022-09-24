@@ -36,7 +36,7 @@ namespace Poc.SignalR.Controllers
             var usuarioLogado = new LoginResponse
             {
                 Token = token,
-                ExpireIn = Convert.ToInt16(TimeSpan.FromHours(_authSettings.ExpiracaoHoras).TotalSeconds),
+                TokenExpiraEm = Convert.ToInt32(TimeSpan.FromHours(_authSettings.ExpiracaoEmHoras).TotalSeconds),
                 Usuario = new UsuarioLogado
                 {
                     Email = request.Email
@@ -55,12 +55,11 @@ namespace Poc.SignalR.Controllers
             {
                 Issuer = _authSettings.Emissor,
                 Audience = _authSettings.ValidoEm,
-                Expires = DateTime.UtcNow.AddHours(_authSettings.ExpiracaoHoras),
+                Expires = DateTime.UtcNow.AddHours(_authSettings.ExpiracaoEmHoras),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256),
                 Subject = new ClaimsIdentity(new List<Claim>
                 {
-                    new Claim(JwtRegisteredClaimNames.Email, dadosLogin.Email),
-                    new Claim("role", "Administrator")
+                    new Claim(JwtRegisteredClaimNames.Email, dadosLogin.Email)
                 })
             };
 

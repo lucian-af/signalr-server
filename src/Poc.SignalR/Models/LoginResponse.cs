@@ -4,7 +4,7 @@
     {
         public string Token { get; set; }
 
-        public int ExpireIn { get; set; }
+        public int TokenExpiraEm { get; set; }
 
         public UsuarioLogado Usuario { get; set; }
     }

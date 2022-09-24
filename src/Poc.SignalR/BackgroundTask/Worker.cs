@@ -20,25 +20,32 @@ namespace Poc.SignalR.BackgroundTask
             _logger.LogInformation("Worker em execução - {data}", DateTime.Now);
 
             var count = 0;
-            while (!stoppingToken.IsCancellationRequested)
+            while (!stoppingToken.IsCancellationRequested && count < 11)
             {
-                // receber mensagem da fila
-                // enviar para o client que está "esperando"
-
-                var idPagamentoEncontrado = "1";
+                var messageGroupQueue = 1;
 
                 await _hubContext
                     .Clients
-                    .Group(idPagamentoEncontrado)
-                    .SendMessageToEspecificClient($"Hello World!! - {count} - idPagamento: {idPagamentoEncontrado}");
+                    .Group(messageGroupQueue.ToString())
+                    .SendMessageToEspecificGroup($"Hello World!! - {count} - group: {messageGroupQueue}");
 
-                _logger.LogInformation("[idPagamento:{idpagamento}] - mensagem nº: {count} enviada em {now}",
-                    idPagamentoEncontrado, count, DateTime.Now);
+                _logger.LogInformation("[messageQueue:{messageQueue}] - mensagem nº: {count} enviada em {now}",
+                    messageGroupQueue, count, DateTime.Now);
+
+                if (count == 10)
+                {
+                    await _hubContext
+                        .Clients
+                        .Group(messageGroupQueue.ToString())
+                        .CloseConnectionToEspecificGroup(messageGroupQueue.ToString());
+                }
 
                 count++;
 
                 await Task.Delay(2000, stoppingToken);
             }
+
+            _logger.LogInformation("Worker encerrado em: {data}", DateTime.Now);
         }
     }
 }
