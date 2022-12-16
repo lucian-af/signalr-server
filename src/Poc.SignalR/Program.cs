@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Http.Connections;
-using Poc.SignalR.BackgroundTask;
 using Poc.SignalR.Configurations;
+using Poc.SignalR.Services;
 using Poc.SignalR.Settings;
 using Poc.SignalServer;
 
@@ -11,9 +11,13 @@ builder.Services.AddControllers();
 var section = builder.Configuration.GetSection(nameof(AuthSettings));
 var authSettings = section.Get<AuthSettings>();
 
-builder.Services
+var services = builder.Services;
+
+services.AddScoped<IProcessService, ProcessService>();
+
+services
     .Configure<AuthSettings>(section)
-    .AddHostedService<Worker>()
+    //.AddHostedService<Worker>()
     .AddSwagger()
     .AddCors(
     options => options.AddPolicy("AllowCors",

@@ -24,10 +24,11 @@ namespace Poc.SignalR.BackgroundTask
             {
                 var messageGroupQueue = 1;
 
-                await _hubContext
-                    .Clients
-                    .Group(messageGroupQueue.ToString())
-                    .SendMessageToEspecificGroup($"Hello World!! - {count} - group: {messageGroupQueue}");
+                // TODO: alterar interface IMessage
+                //await _hubContext
+                //    .Clients
+                //    .Group(messageGroupQueue.ToString())
+                //    .SendMessageToEspecificGroup($"Hello World!! - {count} - group: {messageGroupQueue}");
 
                 _logger.LogInformation("[messageQueue:{messageQueue}] - mensagem nº: {count} enviada em {now}",
                     messageGroupQueue, count, DateTime.Now);
@@ -37,7 +38,7 @@ namespace Poc.SignalR.BackgroundTask
                     await _hubContext
                         .Clients
                         .Group(messageGroupQueue.ToString())
-                        .CloseConnectionToEspecificGroup(messageGroupQueue.ToString());
+                        .CloseConnection(messageGroupQueue.ToString());
                 }
 
                 count++;

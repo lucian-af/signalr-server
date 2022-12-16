@@ -1,8 +1,10 @@
-﻿namespace Poc.SignalR.Hubs.Interfaces
+﻿using Poc.SignalR.ViewModels;
+
+namespace Poc.SignalR.Hubs.Interfaces
 {
     public interface IMessage
     {
-        Task SendMessageToEspecificGroup(string message);
-        Task CloseConnectionToEspecificGroup(string idGroup);
+        Task ProcessMessage(MessageViewModel message);
+        Task CloseConnection(string idGroup);
     }
 }
